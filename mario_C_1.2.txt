@@ -1,0 +1,39 @@
+#include <cs50.h>
+#include <stdio.h>
+
+void print_hashes(int y);
+void print_dots(int y);
+
+int main(void){
+    
+    int y;
+    do 
+    {
+     y = get_int("Height: ");
+    } while(y<1 || y>8);
+    
+      // int row = 1;
+      // int row_padding = 7;
+      for (int i = 0; i < y; i++)
+          {
+            print_dots(y);
+            print_hashes(y);
+            // row+=1;
+            // row_padding-=1;
+          }
+        // printf("\n");
+}
+
+
+// void print_hashes(int y){
+//         for (int j = 0; j<=y; j++)
+//             {
+//                 printf("#");
+//             }
+// }
+// void print_dots(int y){
+//         for (int j = y - 1; j>0; j--)
+//         {
+//             printf(" ");
+//         }
+// }
