@@ -2,4 +2,4 @@
 
 This *will* be my first commit and later repository
 
-_memento mori_ 
+_memento mori_
