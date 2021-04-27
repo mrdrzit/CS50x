@@ -11,7 +11,7 @@ bool real_is_upper(char x);
 
 int main(int argc, string argv[])
 {
-    if (argc != 2) //Check if the user input has only 1 argument (2 because the function call "./caesar" counts in the argument count)
+    if (argc != 2) //Check if the user input has only 1 argument (2 becausa the function call "./caesar" counts in the argument count)
     {
         printf("Error: Inproper command line input!\n");
         exit(EXIT_FAILURE);
