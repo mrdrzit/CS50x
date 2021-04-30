@@ -5,7 +5,7 @@
 
 // Max voters and candidates
 #define MAX_VOTERS 5
-#define MAX_CANDIDATES 3
+#define MAX_CANDIDATES 5
 
 // voters_preferences[i][j] is jth preference for voter i
 int voters_preferences[MAX_VOTERS][MAX_CANDIDATES];
@@ -204,7 +204,6 @@ int find_min(void)
 // Return true if the election is tied between all candidates, false otherwise
 bool is_tie(int min)
 {
-    int min = voter_count;
     for (int i = 0; i < candidate_count; i++)
     {
         if(candidates[i].eliminated == false)
@@ -225,6 +224,19 @@ bool is_tie(int min)
 // Eliminate the candidate (or candidates) in last place
 void eliminate(int min)
 {
-    // TODO
+    for (int i = 0; i < candidate_count; i++)
+    {
+        if(candidates[i].eliminated == false)
+        {
+            if(candidates[i].votes = min)
+            {
+                candidates[i].eliminated = true;
+            }
+        }
+        else if(candidates[i].eliminated == true)
+        {
+            continue;
+        }
+    }
     return;
 }
