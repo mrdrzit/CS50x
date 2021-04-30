@@ -4,8 +4,8 @@
 #include <math.h>
 
 // Max voters and candidates
-#define MAX_VOTERS 5
-#define MAX_CANDIDATES 5
+#define MAX_VOTERS 100
+#define MAX_CANDIDATES 9
 
 // voters_preferences[i][j] is jth preference for voter i
 int voters_preferences[MAX_VOTERS][MAX_CANDIDATES];
@@ -70,7 +70,6 @@ int main(int argc, string argv[])
     {
 
     // Query for each rank
-    loop:
         for (int j = 0; j < candidate_count; j++) //BEWARE OF GOTO LOOP
         {
             string name = get_string("Rank %i: ", j + 1);
@@ -79,10 +78,8 @@ int main(int argc, string argv[])
             if (!vote(i, j, name))
             {
                 printf("Invalid vote.\n");
-                goto loop; //BEWARE OF GOTO LOOP
             }
         }
-
         printf("\n");
     }
 
@@ -148,11 +145,11 @@ void tabulate(void)
     for (int i = 0; i < voter_count; i++)
     {
         int index = voters_preferences[i][0];
-        if (!(candidates[index].eliminated))
+        if (!(candidates[i].eliminated))
         {
             candidates[index].votes++;
         }
-        else if ((candidates[index].eliminated))
+        else if ((candidates[i].eliminated))
         {
             for (int j = 0; j < candidate_count; j++)
             {
@@ -163,8 +160,7 @@ void tabulate(void)
                 else
                 {
                     index += 1;
-                    candidates[index].votes++;
-                    break;
+                    continue;
                 }
             }
         }
@@ -236,7 +232,7 @@ void eliminate(int min)
     {
         if (candidates[i].eliminated == false)
         {
-            if (candidates[i].votes = min)
+            if (candidates[i].votes == min)
             {
                 candidates[i].eliminated = true;
             }
