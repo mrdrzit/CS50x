@@ -16,8 +16,7 @@ typedef struct
     string name;
     int votes;
     bool eliminated;
-}
-candidate;
+} candidate;
 
 // Array of candidates
 candidate candidates[MAX_CANDIDATES];
@@ -70,8 +69,9 @@ int main(int argc, string argv[])
     for (int i = 0; i < voter_count; i++)
     {
 
-        // Query for each rank
-        loop: for (int j = 0; j < candidate_count; j++) //BEWARE OF GOTO LOOP
+    // Query for each rank
+    loop:
+        for (int j = 0; j < candidate_count; j++) //BEWARE OF GOTO LOOP
         {
             string name = get_string("Rank %i: ", j + 1);
 
@@ -145,20 +145,28 @@ bool vote(int voter, int rank, string name)
 // Tabulate votes for non-eliminated candidates
 void tabulate(void)
 {
-    for(int i = 0; i < voter_count; i++)
+    for (int i = 0; i < voter_count; i++)
     {
         int index = voters_preferences[i][0];
-        if(!(candidates[index].eliminated))
+        if (!(candidates[index].eliminated))
         {
             candidates[index].votes++;
         }
-        else if((candidates[index].eliminated))
+        else if ((candidates[index].eliminated))
         {
-            do
+            for (int j = 0; j < candidate_count; j++)
             {
-                index+=1;
-                candidates[index].votes++;
-            } while (candidates[index].eliminated == true);            
+                if(candidates[j].eliminated == true)
+                {
+                    continue;
+                }
+                else
+                {
+                    index += 1;
+                    candidates[index].votes++;
+                    break;
+                }
+            }
         }
     }
     return;
@@ -167,11 +175,11 @@ void tabulate(void)
 // Print the winner of the election, if there is one. bia, carlos or daniel.
 bool print_winner(void)
 {
-    for(int i = 0; i < candidate_count; i++)
+    for (int i = 0; i < candidate_count; i++)
     {
-        float percentage_candidate = (candidates[i].votes/(float)voter_count) * 100.0;
-        float fifty_percent = (voter_count * 0.5/voter_count) * 100;
-        if(percentage_candidate > fifty_percent)
+        float percentage_candidate = (candidates[i].votes / (float)voter_count) * 100.0;
+        float fifty_percent = (voter_count * 0.5 / voter_count) * 100;
+        if (percentage_candidate > fifty_percent)
         {
             printf("%s\n", candidates[i].name);
             return true;
@@ -186,14 +194,14 @@ int find_min(void)
     int min = voter_count;
     for (int i = 0; i < candidate_count; i++)
     {
-        if(candidates[i].eliminated == false)
+        if (candidates[i].eliminated == false)
         {
-            if(candidates[i].votes < min)
+            if (candidates[i].votes < min)
             {
                 min = candidates[i].votes;
             }
         }
-        else if(candidates[i].eliminated == true)
+        else if (candidates[i].eliminated == true)
         {
             continue;
         }
@@ -206,19 +214,19 @@ bool is_tie(int min)
 {
     for (int i = 0; i < candidate_count; i++)
     {
-        if(candidates[i].eliminated == false)
+        if (candidates[i].eliminated == false)
         {
-            if(candidates[i].votes < min)
+            if (candidates[i].votes != min)
             {
-                min = candidates[i].votes;
+                return false;
             }
         }
-        else if(candidates[i].eliminated == true)
+        else if (candidates[i].eliminated == true)
         {
             continue;
         }
     }
-    return min;
+    return true;
 }
 
 // Eliminate the candidate (or candidates) in last place
@@ -226,14 +234,14 @@ void eliminate(int min)
 {
     for (int i = 0; i < candidate_count; i++)
     {
-        if(candidates[i].eliminated == false)
+        if (candidates[i].eliminated == false)
         {
-            if(candidates[i].votes = min)
+            if (candidates[i].votes = min)
             {
                 candidates[i].eliminated = true;
             }
         }
-        else if(candidates[i].eliminated == true)
+        else if (candidates[i].eliminated == true)
         {
             continue;
         }
