@@ -68,7 +68,7 @@ int main(int argc, string argv[])
     {
 
         // Query for each rank
-        for (int j = 0; j < candidate_count; j++)
+        loop: for (int j = 0; j < candidate_count; j++) //BEWARE OF GOTO LOOP
         {
             string name = get_string("Rank %i: ", j + 1);
 
@@ -76,7 +76,7 @@ int main(int argc, string argv[])
             if (!vote(i, j, name))
             {
                 printf("Invalid vote.\n");
-                return 4;
+                goto loop; //BEWARE OF GOTO LOOP
             }
         }
 
@@ -142,7 +142,19 @@ bool vote(int voter, int rank, string name)
 // Tabulate votes for non-eliminated candidates
 void tabulate(void)
 {
-    // TODO
+    for(int i = 0; i < voter_count; i++)
+    {
+        int candidate_index = voters_preferences[i][0];
+        if(!(candidates[i].eliminated))
+        {
+            candidates[candidate_index].votes++;
+        }
+        else
+        {
+            candidate_index+=1;
+            candidates[candidate_index].votes++;
+        }
+    }
     return;
 }
 
