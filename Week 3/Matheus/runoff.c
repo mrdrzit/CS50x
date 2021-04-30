@@ -1,10 +1,11 @@
 #include <cs50.h>
 #include <stdio.h>
 #include <string.h>
+#include <math.h>
 
 // Max voters and candidates
-#define MAX_VOTERS 2
-#define MAX_CANDIDATES 4
+#define MAX_VOTERS 5
+#define MAX_CANDIDATES 3
 
 // voters_preferences[i][j] is jth preference for voter i
 int voters_preferences[MAX_VOTERS][MAX_CANDIDATES];
@@ -21,8 +22,10 @@ candidate;
 // Array of candidates
 candidate candidates[MAX_CANDIDATES];
 
-// Numbers of voters and candidates
+// Numbers of voters
 int voter_count;
+
+// Numbers of candidates
 int candidate_count;
 
 // Function prototypes
@@ -144,32 +147,58 @@ void tabulate(void)
 {
     for(int i = 0; i < voter_count; i++)
     {
-        int candidate_index = voters_preferences[i][0];
-        if(!(candidates[i].eliminated))
+        int index = voters_preferences[i][0];
+        if(!(candidates[index].eliminated))
         {
-            candidates[candidate_index].votes++;
+            candidates[index].votes++;
         }
-        else
+        else if((candidates[index].eliminated))
         {
-            candidate_index+=1;
-            candidates[candidate_index].votes++;
+            do
+            {
+                index+=1;
+                candidates[index].votes++;
+            } while (candidates[index].eliminated == true);            
         }
     }
     return;
 }
 
-// Print the winner of the election, if there is one
+// Print the winner of the election, if there is one. bia, carlos or daniel.
 bool print_winner(void)
 {
-    // TODO
+    for(int i = 0; i < candidate_count; i++)
+    {
+        float percentage_candidate = (candidates[i].votes/(float)voter_count) * 100.0;
+        float fifty_percent = (voter_count * 0.5/voter_count) * 100;
+        if(percentage_candidate > fifty_percent)
+        {
+            printf("%s\n", candidates[i].name);
+            return true;
+        }
+    }
     return false;
 }
 
 // Return the minimum number of votes any remaining candidate has
 int find_min(void)
 {
-    // TODO
-    return 0;
+    int min = voter_count;
+    for (int i = 0; i < candidate_count; i++)
+    {
+        if(candidates[i].eliminated == false)
+        {
+            if(candidates[i].votes < min)
+            {
+                min = candidates[i].votes;
+            }
+        }
+        else if(candidates[i].eliminated == true)
+        {
+            continue;
+        }
+    }
+    return min;
 }
 
 // Return true if the election is tied between all candidates, false otherwise
