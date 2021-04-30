@@ -1,0 +1,11 @@
+sort1 uses: bubble sort
+
+How do you know?: it has the fastest time for the easiest case (sorted) and takes a long time for the hardest case (random)
+
+sort2 uses: merge sort
+
+How do you know?: it has similar times for the different cases (random, reversed and sorted), with relatively fast times
+
+sort3 uses: selection sort
+
+How do you know?: it has similar times for the different cases (random, reversed and sorted), with relatively slow times
