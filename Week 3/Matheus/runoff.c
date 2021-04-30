@@ -3,11 +3,11 @@
 #include <string.h>
 
 // Max voters and candidates
-#define MAX_VOTERS 100
-#define MAX_CANDIDATES 9
+#define MAX_VOTERS 2
+#define MAX_CANDIDATES 4
 
-// preferences[i][j] is jth preference for voter i
-int preferences[MAX_VOTERS][MAX_CANDIDATES];
+// voters_preferences[i][j] is jth preference for voter i
+int voters_preferences[MAX_VOTERS][MAX_CANDIDATES];
 
 // Candidates have name, vote count, eliminated status
 typedef struct
