@@ -144,29 +144,44 @@ void tabulate(void)
 {
     for (int i = 0; i < voter_count; i++)
     {
-        int index = voters_preferences[i][0];
-        if (!(candidates[i].eliminated))
+        for (int j = 0; j < candidate_count; j++)
         {
-            candidates[index].votes++;
-        }
-        else if ((candidates[i].eliminated))
-        {
-            for (int j = 0; j < candidate_count; j++)
+            int index = voters_preferences[i][j];
+            if(!(candidates[index].eliminated))
             {
-                if(candidates[j].eliminated == true)
-                {
-                    continue;
-                }
-                else
-                {
-                    index += 1;
-                    continue;
-                }
+                candidates[index].votes++;
+                break;
             }
         }
     }
-    return;
 }
+// {
+//     for (int i = 0; i < voter_count; i++)
+//     {
+//         int index = voters_preferences[i][0];
+//         if (!(candidates[index].eliminated))
+//         {
+//             candidates[index].votes++;
+//         }
+//         else 
+//         {
+//             for (int j = 0; j < candidate_count; j++)
+//             {
+//                 if(candidates[index].eliminated)
+//                 {
+//                     index++;
+//                     continue;
+//                 }
+//                 else
+//                 {
+//                     candidates[index].votes++;
+//                     break;
+//                 }
+//             }
+//         }
+//     }
+//     return;
+// }
 
 // Print the winner of the election, if there is one. bia, carlos or daniel.
 bool print_winner(void)
