@@ -3,46 +3,44 @@
 
 int main(void)
 {
-    int even[10]={ [0 ... 9 ] = 0 };
-    int odd[11]={ [0 ... 10 ] = 0 };
+    int array[4]={ 0 };
+    int array_length = sizeof(array) / sizeof(array[0]);
 
-    int even_length = sizeof(even) / sizeof(even[0]);
-    int odd_length = sizeof(odd) / sizeof(odd[0]);
-    for (int i = 1; i <= even_length; i++)
+    for (int i = 1; i <= array_length; i++)
     {
-        even[i] = i;
-    }
-    for (int i = 1; i <= odd_length; i++)
-    {
-        odd[i] = i;
+        array[i] = i;
     }
 
-    int start_pointer = odd[0];
-    int end_pointer = odd_length;
-    int swap_temp;
-
-
-    for (int i = 0; i < round(odd_length/2.0); i++)
+    if (array_length % 2 != 0)
     {
-        swap_temp = odd[i];
-        odd[i] = odd[end_pointer];
-        odd[end_pointer] = swap_temp;
-        end_pointer--;
-        start_pointer++;
+        int start_pointer = array[0];
+        int end_pointer = array_length - 1;
+        int swap_temp;
+
+        //Actually swap the values of an array that contains an even number of elements
+        for (int i = 0; i < floor(array_length/2.0); i++)
+        {
+            swap_temp = array[i];
+            array[i] = array[end_pointer];
+            array[end_pointer] = swap_temp;
+            end_pointer--;
+            start_pointer++;
+        }
     }
-
-    int start_pointer = even[0];
-    int end_pointer = even_length;
-    int swap_temp;
-
-
-    for (int i = 0; i < round(even_length/2); i++)
+    else 
     {
-        swap_temp = even[i];
-        even[i] = even[end_pointer];
-        even[end_pointer] = swap_temp;
-        end_pointer--;
-        start_pointer++;
-    }
+        int start_pointer = array[0];
+        int end_pointer = array_length - 1;
+        int swap_temp;
 
+        //Actually swap the values of an array that contains an odd number of elements
+        for (int i = 0; i < round(array_length/2); i++)
+        {
+            swap_temp = array[i];
+            array[i] = array[end_pointer];
+            array[end_pointer] = swap_temp;
+            end_pointer--;
+            start_pointer++;
+        }
+    }
 }
