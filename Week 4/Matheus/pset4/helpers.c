@@ -57,6 +57,44 @@ void sepia(int height, int width, RGBTRIPLE image[height][width])
 // Reflect image horizontally
 void reflect(int height, int width, RGBTRIPLE image[height][width])
 {
+    
+    int cols = width;
+    int rows = height;
+    int length = sizeof(image[0]) / sizeof(image[0][0]);
+    RGBTRIPLE swap_temp;
+
+    if (length % 2 != 0) //Check if the rows in this image are even or odd. This can be done only once because an image is a ractangular grid of pixels.
+    {
+        for (int irow = 0; irow < rows; irow++)
+        {
+            int end_pointer = length - 1;
+            int start_pointer = 0;
+            for (int i = 0; i < floor(length/2.0); i++)
+            {
+                swap_temp = image[irow][i];
+                image[irow][i] = image[irow][end_pointer];
+                image[irow][end_pointer] = swap_temp;
+                end_pointer--;
+                start_pointer++;
+            }
+        }
+    }
+    else
+    {
+        for (int irow = 0; irow < rows; irow++)
+        {
+            int end_pointer = length - 1;
+            int start_pointer = 0;
+            for (int i = 0; i < round(length/2.0); i++)
+            {
+                swap_temp = image[irow][i];
+                image[irow][i] = image[irow][end_pointer];
+                image[irow][end_pointer] = swap_temp;
+                end_pointer--;
+                start_pointer++;
+            } 
+        }
+    }
     return;
 }
 
