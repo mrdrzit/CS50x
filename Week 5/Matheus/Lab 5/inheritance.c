@@ -52,21 +52,23 @@ person *create_family(int generations)
     if (generations > 1)
     {
         // TODO: #2 Recursively create blood type histories for parents
-
+        int current_gen = generations - 1;
+        tmp_family->parents[0] = create_family(current_gen);
+        tmp_family->parents[1] = create_family(current_gen);
+        
         // TODO: #3 Randomly assign child alleles based on parents
+        tmp_family->alleles[0] = tmp_family->parents[0]->alleles[rand() % 2];
+        tmp_family->alleles[1] = tmp_family->parents[1]->alleles[rand() % 2];
     }
 
     // Generation without parent data
     else
     {
         // TODO: #4 Set parent pointers to NULL
-        int current_gen = generations - 1;
-        tmp_family->parents[0] = create_family(current_gen);
-        tmp_family->parents[1] = create_family(current_gen);
+
 
         // TODO: #5 Randomly assign alleles
-        tmp_family->alleles[0] = tmp_family->parents[0]->alleles[rand() % 2];
-        tmp_family->alleles[1] = tmp_family->parents[1]->alleles[rand() % 2];
+
 
     }
 
