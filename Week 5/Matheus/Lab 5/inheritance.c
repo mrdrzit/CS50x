@@ -45,7 +45,7 @@ person *create_family(int generations)
     //Check if the pointer is NULL
     if (tmp_family == NULL)
     {
-        return 1
+        return 1;
     }
 
     // Generation with parent data
