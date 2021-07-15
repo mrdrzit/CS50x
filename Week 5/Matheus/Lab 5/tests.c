@@ -1,5 +1,3 @@
-// Simulate genetic inheritance of blood type
-
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -15,6 +13,8 @@ person;
 
 const int GENERATIONS = 3;
 const int INDENT_LENGTH = 4;
+const char ALELLES[3] = {'A','B','O'};
+int meu = 3;
 
 person *create_family(int generations);
 void print_family(person *p, int generation);
@@ -45,15 +45,21 @@ person *create_family(int generations)
     //Check if the pointer is NULL
     if (tmp_family == NULL)
     {
-        return 1;
+        return 0;
     }
     
     // Generation with parent data
     if (generations > 1)
     {
         // TODO: #2 Recursively create blood type histories for parents
+        int current_gen = generations - 1;
+        tmp_family->parents[0] = create_family(current_gen);
+        tmp_family->parents[1] = create_family(current_gen);
 
         // TODO: #3 Randomly assign child alleles based on parents
+        tmp_family->alleles[0] = tmp_family->parents[0]->alleles[rand() % 2];
+        tmp_family->alleles[1] = tmp_family->parents[1]->alleles[rand() % 2];
+
     }
 
     // Generation without parent data
