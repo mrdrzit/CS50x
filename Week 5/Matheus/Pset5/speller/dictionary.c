@@ -22,6 +22,10 @@ node *table[N];
 bool check(const char *word)
 {
     // TODO
+    // Its case insensitive
+    // Acess the list at the index found
+    // Look for the word with strcasecmp
+    // To traverse the list, create a cursor to check each word and if you get NULL, you're at the end
     return false;
 }
 
@@ -29,6 +33,9 @@ bool check(const char *word)
 unsigned int hash(const char *word)
 {
     // TODO
+    // Receives a word with alphabetical chars and apostrophes
+    // Coughs out a numerical index between 0 and N - 1 (inclusive)
+    // Needs to be deterministic as in, when calculating the hash, it outputs the same result every time
     return 0;
 }
 
@@ -36,6 +43,21 @@ unsigned int hash(const char *word)
 bool load(const char *dictionary)
 {
     // TODO
+    // Open dictionary file
+    // fopen with checking fo null
+
+    // Read strings from the file one at a time
+    // fscanf, which returns a EOF when it reaches the end
+
+    // Create a new node for each word
+    // Use malloc for each node and check for null value
+    // Copy word into the node using strcpy
+
+    // Hash the word to obtain a hash value
+    // The hash function return an index
+
+    // Insert node into hashtable at that location
+    // Index into the hash table using the correct pointer onder
     return false;
 }
 
