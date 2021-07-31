@@ -4,16 +4,18 @@
 
 #include "dictionary.h"
 
+//Prototype for the hash function
+unsigned long hash(char *word);
+
 // Represents a node in a hash table
 typedef struct node
 {
     char word[LENGTH + 1];
     struct node *next;
-}
-node;
+} node;
 
 // Number of buckets in hash table
-const unsigned int N = 1;
+const unsigned int N = 50;
 
 // Hash table
 node *table[N];
@@ -28,20 +30,28 @@ bool check(const char *word)
     return false;
 }
 
+// djb2 hash function from http://www.cse.yorku.ca/~oz/hash.html
 // Hashes word to a number
-unsigned int hash(const char *word)
+unsigned long hash(char *word)
 {
     // TODO #11 Create Hash function (or find a good one in the internet)
     // Receives a word with alphabetical chars and apostrophes
     // Coughs out a numerical index between 0 and N - 1 (inclusive)
     // Needs to be deterministic as in, when calculating the hash, it outputs the same result every time
-    return 0;
+
+    unsigned long hash = 5381;
+    int c;
+    while ((c = *word++))
+    {
+        hash = ((hash << 5) + hash) + tolower(c);
+    }
+    return hash % (N - 1);
 }
 
 // Loads dictionary into memory, returning true if successful, else false
 bool load(const char *dictionary)
 {
-    // TODO #12 Create the load function 
+    // TODO #12 Create the load function
     // Read strings from the file one at a time
     // fscanf, which returns a EOF when it reaches the end
 
