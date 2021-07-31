@@ -4,8 +4,6 @@
 
 #include "dictionary.h"
 
-//Prototype for the hash function
-unsigned long hash(char *word);
 
 // Represents a node in a hash table
 typedef struct node
@@ -32,7 +30,7 @@ bool check(const char *word)
 
 // djb2 hash function from http://www.cse.yorku.ca/~oz/hash.html
 // Hashes word to a number
-unsigned long hash(char *word)
+unsigned int hash(const char *word)
 {
     // TODO #11 Create Hash function (or find a good one in the internet)
     // Receives a word with alphabetical chars and apostrophes
