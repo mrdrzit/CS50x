@@ -22,10 +22,6 @@ node *table[N];
 bool check(const char *word)
 {
     // TODO #10 Create Check Function
-    // Its case insensitive
-    // Acess the list at the index found
-    // Look for the word with strcasecmp
-    // To traverse the list, create a cursor to check each word and if you get NULL, you're at the end
     return false;
 }
 
