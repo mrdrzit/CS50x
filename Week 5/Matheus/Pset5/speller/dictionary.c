@@ -50,7 +50,6 @@ unsigned int hash(const char *word)
 bool load(const char *dictionary)
 {
     // TODO #12 Create the load function
-
     // Read strings from the file one at a time
     // fscanf, which returns a EOF when it reaches the end
 
