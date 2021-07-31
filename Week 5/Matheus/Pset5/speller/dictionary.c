@@ -21,7 +21,7 @@ node *table[N];
 // Returns true if word is in dictionary, else false
 bool check(const char *word)
 {
-    // TODO
+    // TODO #10 Create Check Function
     // Its case insensitive
     // Acess the list at the index found
     // Look for the word with strcasecmp
@@ -32,7 +32,7 @@ bool check(const char *word)
 // Hashes word to a number
 unsigned int hash(const char *word)
 {
-    // TODO
+    // TODO #11 Create Hash function (or find a good one in the internet)
     // Receives a word with alphabetical chars and apostrophes
     // Coughs out a numerical index between 0 and N - 1 (inclusive)
     // Needs to be deterministic as in, when calculating the hash, it outputs the same result every time
@@ -42,10 +42,7 @@ unsigned int hash(const char *word)
 // Loads dictionary into memory, returning true if successful, else false
 bool load(const char *dictionary)
 {
-    // TODO
-    // Open dictionary file
-    // fopen with checking fo null
-
+    // TODO #12 Create the load function 
     // Read strings from the file one at a time
     // fscanf, which returns a EOF when it reaches the end
 
@@ -64,13 +61,13 @@ bool load(const char *dictionary)
 // Returns number of words in dictionary if loaded, else 0 if not yet loaded
 unsigned int size(void)
 {
-    // TODO #13 Create a size function
+    // TODO #13 Create a size func #13
     return 0;
 }
 
 // Unloads dictionary from memory, returning true if successful, else false
 bool unload(void)
 {
-    // TODO #14 Create a unload function
+    // TODO #14 Create a unload fu #14on
     return false;
 }
