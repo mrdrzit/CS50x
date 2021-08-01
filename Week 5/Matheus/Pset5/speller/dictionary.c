@@ -1,9 +1,12 @@
 // Implements a dictionary's functionality
 
+#include <stdio.h>
 #include <stdbool.h>
+#include <string.h>
+#include <ctype.h>
+#include <stdlib.h>
 
 #include "dictionary.h"
-
 
 // Represents a node in a hash table
 typedef struct node
@@ -13,7 +16,10 @@ typedef struct node
 } node;
 
 // Number of buckets in hash table
-const unsigned int N = 50;
+const unsigned int N = 26;
+
+// Dictionary
+char *dict = "C:\\Users\\uzuna\\Documents\\Harvard course Computer Science\\CS50_Weeks0-10\\Week 5\\Matheus\\Pset5\\speller\\dictionaries\\small";
 
 // Hash table
 node *table[N];
