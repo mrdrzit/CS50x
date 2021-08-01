@@ -1,6 +1,10 @@
 // Implements a dictionary's functionality
 
+#include <stdio.h>
 #include <stdbool.h>
+#include <string.h>
+#include <ctype.h>
+#include <stdlib.h>
 
 #include "dictionary.h"
 
@@ -9,7 +13,8 @@
 typedef struct node
 {
     char word[LENGTH + 1];
-    struct node *next;
+    int is_occupied;
+    int offset;
 } node;
 
 // Number of buckets in hash table
@@ -62,7 +67,55 @@ bool load(const char *dictionary)
 
     // Insert node into hashtable at that location
     // Index into the hash table using the correct pointer onder
-    return false;
+
+    FILE *input = fopen(dictionary, "r");
+    if (input == NULL)
+    {
+        printf("Could not open file.\n");
+        return false;
+    }
+
+    char word[LENGTH];
+    initialize(table, 97);
+    int hash_offset = 0;
+    int new_hash_pos = 0;
+
+    while (fscanf(input, "%s", word) != EOF)
+    {
+        char fst_letter = tolower(word[0]); // Pega a primeira letra da palavra escaneada (tolower pra ficar sempre igual)
+        int pos_alphab = fst_letter - 97;   // Usa a letra pra definir em qual posição inicial ela vai. Ordem alfabetica.
+
+        //Check if the address is valid
+        node *n = malloc(sizeof(node)); // Cria um node temporário (a cada iteração) pra guardar a palavra na linked list
+        if (n == NULL)                  //|| table[pos_alphab] == NULL)
+        {
+            printf("Not enough memory");
+            return false;
+        }
+
+        //n->next = NULL;        // Inicializa o campo next do node pra NULL
+        strcpy(n->word, word); // Copia a palavra escaneada pra dentro do campo "word" do node temporário
+
+        int index_in_list = hash(word); // Usa a função hash pra pegar um valor novo pra encaixar o node dentro da lista (entre a-z)
+        printf("The position at which this node would go is: %d\n", index_in_list);
+
+        if (table[index_in_list]->is_occupied != 0)
+        {
+            while (table[index_in_list]->is_occupied != 0)
+            {
+                if (index_in_list == 97)
+                {
+                    index_in_list = index_in_list % 97;
+                }
+                index_in_list++;
+                hash_offset++;
+            }
+        }
+        table[index_in_list] = n;
+        table[index_in_list]->is_occupied = 1;
+        table[index_in_list]->offset = hash_offset;
+    }
+    return true;
 }
 
 // Returns number of words in dictionary if loaded, else 0 if not yet loaded
