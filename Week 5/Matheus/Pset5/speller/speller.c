@@ -12,7 +12,8 @@
 #undef getrusage
 
 // Default dictionary
-#define DICTIONARY "dictionaries/large"
+#define DICTIONARY "C:\\Users\\uzuna\\Documents\\Harvard course Computer Science\\CS50_Weeks0-10\\Week 5\\Matheus\\Pset5\\speller\\dictionaries\\large"
+//#define DICTIONARY "C:\\Users\\uzuna\\Documents\\Harvard course Computer Science\\CS50_Weeks0-10\\Week 5\\Matheus\\Pset5\\speller\\dictionaries\\small"
 
 int main(int argc, char *argv[])
 {
