@@ -8,11 +8,14 @@
 
 #include "dictionary.h"
 
+void initialize(node *table_of_nodes[], int size);
+
 // Represents a node in a hash table
 typedef struct node
 {
     char word[LENGTH + 1];
-    struct node *next;
+    int is_occupied;
+    int offset;
 } node;
 
 // Number of buckets in hash table
@@ -83,4 +86,16 @@ bool unload(void)
 {
     // TODO #14 Create a unload fu #14on
     return false;
+}
+
+void initialize(node *table_of_nodes[], int size)
+{
+    for (int i = 0; i < size; i++)
+    {
+        table_of_nodes[i] = malloc(sizeof(node));
+    }
+    for (int i = 0; i < size; i++)
+    {
+        table_of_nodes[i]->is_occupied = 0;
+    }
 }
