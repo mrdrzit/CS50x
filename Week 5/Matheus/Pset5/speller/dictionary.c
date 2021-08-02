@@ -8,7 +8,7 @@
 
 #include "dictionary.h"
 
-void initialize(node *table_of_nodes[], int size);
+
 
 // Represents a node in a hash table
 typedef struct node
@@ -18,14 +18,15 @@ typedef struct node
     int offset;
 } node;
 
-// Number of buckets in hash table
-const unsigned int N = 26;
+void initialize(node *table_of_nodes[], int size);
 
-// Dictionary
-char *dict = "C:\\Users\\uzuna\\Documents\\Harvard course Computer Science\\CS50_Weeks0-10\\Week 5\\Matheus\\Pset5\\speller\\dictionaries\\small";
+int dic_size = 0; // Nice variable name ( ͡° ͜ʖ ͡°)
+
+// Number of buckets in hash table
+const unsigned int N = 98;
 
 // Hash table
-node *table[N];
+node *table[97];
 
 // Returns true if word is in dictionary, else false
 bool check(const char *word)
@@ -114,6 +115,7 @@ bool load(const char *dictionary)
             }
         }
         table[index_in_list] = n;
+        dic_size++; // Nice variable name ( ͡° ͜ʖ ͡°)
         table[index_in_list]->is_occupied = 1; // Assim que preencher o node, marca como ocupado
         table[index_in_list]->offset = hash_offset; // Guarda qual é o valor do offset pra poder usar na procura depois
     }
@@ -124,7 +126,7 @@ bool load(const char *dictionary)
 unsigned int size(void)
 {
     // TODO #13 Create a size func #13
-    return 0;
+    return dic_size; // ( ͡° ͜ʖ ͡°)
 }
 
 // Unloads dictionary from memory, returning true if successful, else false
