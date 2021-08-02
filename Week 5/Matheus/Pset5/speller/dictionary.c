@@ -76,9 +76,8 @@ bool load(const char *dictionary)
     }
 
     char word[LENGTH];
-    initialize(table, 97);
-    int hash_offset = 0;
-    int new_hash_pos = 0;
+    initialize(table, 97); // Função que inicializa todos os valores dentro da hashtable pra 0
+    int hash_offset = 0; // Inicializa o valor que será o offset caso haja alguma colisão de chaves 
 
     while (fscanf(input, "%s", word) != EOF)
     {
@@ -97,23 +96,23 @@ bool load(const char *dictionary)
         strcpy(n->word, word); // Copia a palavra escaneada pra dentro do campo "word" do node temporário
 
         int index_in_list = hash(word); // Usa a função hash pra pegar um valor novo pra encaixar o node dentro da lista (entre a-z)
-        printf("The position at which this node would go is: %d\n", index_in_list);
+        printf("The position at which this node would go is: %d\n", index_in_list); // Debugging statementent
 
-        if (table[index_in_list]->is_occupied != 0)
+        if (table[index_in_list]->is_occupied != 0) // Se o node que quer inserir já estiver ocupado..
         {
-            while (table[index_in_list]->is_occupied != 0)
+            while (table[index_in_list]->is_occupied != 0) // Loopa procurando um outro lugar desocupado
             {
-                if (index_in_list == 97)
+                if (index_in_list == 97) 
                 {
-                    index_in_list = index_in_list % 97;
+                    index_in_list = index_in_list % 97; // Se chegar no fim da lista, vai pro começo 
                 }
-                index_in_list++;
-                hash_offset++;
+                index_in_list++; 
+                hash_offset++; // Aumenta o valor do "offset" toda vez que andar um índice
             }
         }
         table[index_in_list] = n;
-        table[index_in_list]->is_occupied = 1;
-        table[index_in_list]->offset = hash_offset;
+        table[index_in_list]->is_occupied = 1; // Assim que preencher o node, marca como ocupado
+        table[index_in_list]->offset = hash_offset; // Guarda qual é o valor do offset pra poder usar na procura depois
     }
     return true;
     //Soundtrack - (Ocean) Bloom ft. Radiohead - Blue Planet II Unreleased Soundtrack
