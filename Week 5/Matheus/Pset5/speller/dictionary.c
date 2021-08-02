@@ -71,6 +71,7 @@ bool load(const char *dictionary)
 
     // Insert node into hashtable at that location
     // Index into the hash table using the correct pointer onder
+
     FILE *input = fopen(dictionary, "r");
     if (input == NULL)
     {
@@ -118,6 +119,7 @@ bool load(const char *dictionary)
         table[index_in_list]->offset = hash_offset; // Guarda qual é o valor do offset pra poder usar na procura depois
     }
     return true;
+    //Soundtrack - (Ocean) Bloom ft. Radiohead - Blue Planet II Unreleased Soundtrack
 }
 
 // Returns number of words in dictionary if loaded, else 0 if not yet loaded
